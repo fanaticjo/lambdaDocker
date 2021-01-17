@@ -10,7 +10,7 @@ Pre-requistive
     You can use the base python image provided by aws
     Please see the Dockerfile
    
-3) You must run docker build . -t <project_name>:<version>
+3) You must run docker build . -t <project_name>:<version-nu>
 
 4) Give Docker push the appropriate permission 
    aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin <accnumber>.dkr.ecr.us-east-1.amazonaws.com
