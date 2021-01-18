@@ -1,7 +1,3 @@
-import json
-import re
-from pprint import pprint
-
 import boto3
 import logging
 from botocore.errorfactory import ClientError
@@ -30,7 +26,7 @@ def get_s3_file(bucket=None, Key=None):
             raise e
         elif error.get('Code').lower()=='nosuchbucket':
             logger.error("Bucket does not exist")
-            return None
+            raise e
         else:
             logger.error("Error not identified",e.response)
             raise e
@@ -40,15 +36,12 @@ def get_s3_file(bucket=None, Key=None):
 
 
 def handler(event, context):
-    Bucket = "iap-ec2-demo1"
+    print("starting")
+    Bucket = "iap-ec2-demo"
     Key = "Weather/Currently/"
     logger.info("starting the task")
     data = get_s3_file(Bucket, Key)
-    for x in data:
-        logger.info(x)
-    logger.info(data)
-    return {"abc": data}
+    return {"abc": list(data)}
 
-
-if __name__ == "__main__":
-    handler(1, 2)
+if __name__=="__main__":
+    print(handler(1,2))
